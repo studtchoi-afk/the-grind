@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE GRIND — Daily Challenge</title>
+<style>
+:root{--bg:#07090d;--card:#10141c;--card2:#151a24;--line:#252c38;--text:#f7f8fa;--muted:#8993a3;--lime:#b7ff35;--lime2:#79d91b;--orange:#ffb347}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#1c2520 0,#07090d 42%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}.wrap{max-width:1120px;margin:auto;padding:22px 18px 70px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 35px}.brand{font-weight:1000;font-size:25px;letter-spacing:-1.5px}.brand i{font-style:normal;color:var(--lime)}.pill{border:1px solid var(--line);background:#0e1218;border-radius:999px;padding:9px 14px;color:#cbd2dd;font-size:13px}
+.hero{text-align:center;padding:30px 0 12px}.eyebrow{color:var(--lime);font-weight:900;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(48px,10vw,92px);line-height:.9;margin:13px 0;letter-spacing:-6px}.hero h1 span{color:var(--lime)}.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:600px}
+.grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;margin-top:30px}.card{background:linear-gradient(180deg,#111620,#0d1118);border:1px solid var(--line);border-radius:25px;padding:22px;box-shadow:0 15px 50px #0005}.card h2{font-size:18px;margin:0 0 15px}.label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1.3px;text-transform:uppercase;margin:18px 0 9px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{cursor:pointer;background:#171c26;color:#dce1e8;border:1px solid #2b3240;border-radius:12px;padding:10px 13px}.choice:hover{border-color:#657080}.choice.active{background:var(--lime);color:#0a1004;border-color:var(--lime);font-weight:900}
+.generate{width:100%;margin-top:22px;border:0;border-radius:15px;padding:16px;background:var(--lime);color:#091005;font-weight:1000;font-size:16px;cursor:pointer;box-shadow:0 8px 25px #9be52a22}.generate:hover{background:#c8ff61;transform:translateY(-1px)}
+.challenge{min-height:420px;display:flex;flex-direction:column;justify-content:center;text-align:center}.tag{display:inline-block;align-self:center;border-radius:999px;padding:7px 12px;background:#1a2117;color:var(--lime);font-size:11px;font-weight:900;letter-spacing:1px}.challenge h2{font-size:clamp(30px,5vw,52px);letter-spacing:-2px;margin:13px 0 5px}.target{font-size:20px;font-weight:800}.rules{color:#aab3c0;text-align:left;max-width:570px;margin:20px auto 0;padding:16px 20px;border:1px solid var(--line);border-radius:16px;background:#0a0d12}.rules li{margin:7px 0}.progress{margin:21px auto 0;max-width:570px}.track{height:12px;background:#252c37;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:var(--lime);transition:.25s}.count{font-size:12px;color:var(--muted);margin-top:7px}.actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}.smallbtn{cursor:pointer;border:1px solid #303746;background:#171c25;color:#e9edf2;border-radius:11px;padding:9px 12px}.smallbtn:hover{border-color:#657080}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#0b0f15;border:1px solid var(--line);border-radius:15px;padding:15px;text-align:center}.stat b{display:block;font-size:26px}.stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.history{display:grid;gap:8px;max-height:210px;overflow:auto}.history div{padding:11px 13px;border-radius:11px;background:#0b0f15;border:1px solid var(--line);font-size:13px}.history small{display:block;color:var(--muted);margin-top:3px}
+.pro{margin-top:18px;background:linear-gradient(135deg,#1b2411,#111712);border:1px solid #42552a}.pro h2{font-size:25px}.pro p{color:#aeb8a0}.pro ul{color:#cbd4c0;padding-left:20px;line-height:1.8}.pro .buy{display:inline-block;margin-top:8px;text-decoration:none;background:var(--lime);color:#081004;font-weight:900;padding:12px 15px;border-radius:12px}
+footer{text-align:center;color:#596272;font-size:11px;margin-top:30px;line-height:1.6}
+@media(max-width:800px){.grid,.bottom{grid-template-columns:1fr}.hero h1{letter-spacing:-4px}.stats{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="brand">THE <i>GRIND</i></div><div class="pill">FREE • NO ACCOUNT NEEDED</div></nav>
+<section class="hero"><div class="eyebrow">STOP SCROLLING. START GRINDING.</div><h1>WHAT'S YOUR<br><span>CHALLENGE?</span></h1><p>Generate a challenge, track your progress, build a streak, and see how far you can push your consistency.</p></section>
+
+<div class="grid">
+<section class="card">
+<h2>Build your challenge</h2>
+<div class="label">Category</div>
+<div class="choices" id="cats">
+<button class="choice active" data-v="basketball">🏀 Basketball</button><button class="choice" data-v="football">⚽ Football</button><button class="choice" data-v="fitness">💪 Fitness</button><button class="choice" data-v="swimming">🏊 Swimming</button><button class="choice" data-v="school">📚 School</button><button class="choice" data-v="random">🎲 Random</button>
+</div>
+<div class="label">Difficulty</div>
+<div class="choices" id="diff">
+<button class="choice active" data-v="easy">Easy</button><button class="choice" data-v="hard">Hard</button><button class="choice" data-v="insane">Insane</button><button class="choice" data-v="legendary">Legendary</button>
+</div>
+<button class="generate" id="gen">GENERATE CHALLENGE →</button>
+</section>
+
+<section class="card challenge">
+<div class="tag" id="tag">READY</div><h2 id="title">YOUR NEXT GRIND</h2><div class="target" id="target">Choose your settings and generate a challenge.</div>
+<div class="rules"><strong>Rules</strong><ul id="rules"><li>Keep it safe.</li><li>Quality beats rushing.</li><li>Break big challenges into manageable sessions.</li></ul></div>
+<div class="progress"><div class="track"><div class="fill" id="fill"></div></div><div class="count" id="count">0 / 0</div></div>
+<div class="actions"><button class="smallbtn" id="minus">−1</button><button class="smallbtn" id="plus">+1</button><button class="smallbtn" id="done">MARK COMPLETE</button><button class="smallbtn" id="new">NEW CHALLENGE</button></div>
+</section>
+</div>
+
+<div class="bottom">
+<section class="card"><h2>Your stats</h2><div class="stats"><div class="stat"><b id="completed">0</b><span>Completed</span></div><div class="stat"><b id="streak">0</b><span>Day streak</span></div><div class="stat"><b id="total">0</b><span>Total</span></div></div></section>
+<section class="card"><h2>Recent grind</h2><div class="history" id="history"><div>No completed challenges yet.<small>Your completed challenges will appear here.</small></div></div></section>
+</div>
+
+<section class="card pro">
+<h2>THE GRIND PRO</h2><p>A simple way to monetize the site without ruining the free experience.</p>
+<ul><li>Custom challenge builder</li><li>Personalized 30-day challenge plans</li><li>More stats and progress charts</li><li>Exclusive challenge packs</li></ul>
+<a class="buy" href="#" onclick="alert('Connect this button to Stripe Checkout or another payment provider when you publish the site.');return false">GET PRO — $2.99/mo</a>
+</section>
+<footer>For training challenges: choose sensible targets, take breaks, and stop if you feel pain. Swimming should be done in an appropriate supervised setting. Payment processing requires a supported payment account and, depending on your age/location, an adult or guardian may need to set it up.</footer>
+</div>
+
+<script>
+const data={
+basketball:{easy:[["50 SHOT CHALLENGE","Make 50 basketball shots",50],["25 FREE THROWS","Make 25 free throws",25]],hard:[["100 SHOT CHALLENGE","Make 100 basketball shots",100],["200 DRIBBLES","Complete 200 controlled dribbles",200]],insane:[["500 SHOT CHALLENGE","Make 500 basketball shots",500],["1,000 DRIBBLES","Complete 1,000 controlled dribbles",1000]],legendary:[["1,000 MADE SHOTS","Make 1,000 basketball shots",1000],["10,000 DRIBBLES","Complete 10,000 controlled dribbles",10000]]},
+football:{easy:[["100 TOUCHES","Complete 100 controlled ball touches",100],["25 PASSES","Complete 25 accurate passes",25]],hard:[["500 TOUCHES","Complete 500 controlled touches",500],["100 PASSES","Complete 100 accurate passes",100]],insane:[["1,000 TOUCHES","Complete 1,000 controlled touches",1000],["500 PASSES","Complete 500 accurate passes",500]],legendary:[["10,000 TOUCHES","Complete 10,000 controlled touches",10000],["5,000 PASSES","Complete 5,000 accurate passes",5000]]},
+fitness:{easy:[["10 PUSH-UPS","Complete 10 quality push-ups",10],["20 SQUATS","Complete 20 bodyweight squats",20]],hard:[["50 PUSH-UPS","Complete 50 push-ups total",50],["100 SQUATS","Complete 100 bodyweight squats",100]],insane:[["200 PUSH-UPS","Complete 200 push-ups total",200],["300 SQUATS","Complete 300 bodyweight squats",300]],legendary:[["500 PUSH-UPS","Complete 500 push-ups total",500],["1,000 BODYWEIGHT REPS","Complete 1,000 safe bodyweight reps",1000]]},
+swimming:{easy:[["20 LAPS","Complete 20 pool lengths",20],["15 MINUTES","Swim for 15 minutes",15]],hard:[["40 LAPS","Complete 40 pool lengths",40],["30 MINUTES","Swim for 30 minutes",30]],insane:[["80 LAPS","Complete 80 pool lengths",80],["60 MINUTES","Swim for 60 minutes",60]],legendary:[["100 LAPS","Complete 100 pool lengths",100],["120 MINUTES","Accumulate 120 minutes of swimming",120]]},
+school:{easy:[["20 MIN STUDY","Study for 20 focused minutes",20],["10 QUESTIONS","Complete 10 practice questions",10]],hard:[["60 MIN STUDY","Complete 60 focused minutes",60],["50 QUESTIONS","Complete 50 practice questions",50]],insane:[["3 HOUR STUDY","Accumulate 3 focused hours",180],["100 QUESTIONS","Complete 100 practice questions",100]],legendary:[["7 DAY STUDY GRIND","Study 30 focused minutes for 7 days",7],["500 QUESTIONS","Complete 500 practice questions",500]]}
+};
+let cat="basketball",dif="easy",cur=null,p=0;
+let S=JSON.parse(localStorage.getItem("theGrind")||'{"completed":0,"streak":0,"total":0,"last":"","history":[]}');
+const $=id=>document.getElementById(id);
+function group(id,fn){document.querySelectorAll("#"+id+" .choice").forEach(b=>b.onclick=()=>{document.querySelectorAll("#"+id+" .choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");fn(b.dataset.v)})}
+group("cats",v=>cat=v);group("diff",v=>dif=v);
+function rules(){return ["Use controlled technique.","Take breaks whenever needed.","Stop if you feel pain.","For large targets, split the challenge into multiple sessions."]}
+function gen(){let c=cat==="random"?Object.keys(data)[Math.floor(Math.random()*5)]:cat;let a=data[c][dif];cur=a[Math.floor(Math.random()*a.length)];p=0;$("tag").textContent=dif.toUpperCase()+" • "+c.toUpperCase();$("title").textContent=cur[0];$("target").textContent=cur[1];$("rules").innerHTML=rules().map(x=>"<li>"+x+"</li>").join("");update()}
+function update(){if(!cur)return;$("count").textContent=p.toLocaleString()+" / "+cur[2].toLocaleString();$("fill").style.width=Math.min(100,p/cur[2]*100)+"%"}
+function save(){localStorage.setItem("theGrind",JSON.stringify(S));$("completed").textContent=S.completed;$("streak").textContent=S.streak;$("total").textContent=S.total;$("history").innerHTML=S.history.length?S.history.slice().reverse().map(x=>"<div><b>"+x.title+"</b><small>"+x.date+" • "+x.cat+" • "+x.dif+"</small></div>").join(""):"<div>No completed challenges yet.<small>Your completed challenges will appear here.</small></div>"}
+$("gen").onclick=gen;$("new").onclick=gen;$("plus").onclick=()=>{if(cur){p=Math.min(cur[2],p+1);update()}};$("minus").onclick=()=>{if(cur){p=Math.max(0,p-1);update()}};
+$("done").onclick=()=>{if(!cur||p<cur[2]){alert("Finish the target first.");return}let now=new Date();let day=now.toISOString().slice(0,10);if(S.last!==day){S.streak+=1;S.last=day}S.completed++;S.total+=cur[2];S.history.push({title:cur[0],cat,dif,date:day});S.history=S.history.slice(-10);save();alert("CHALLENGE COMPLETE. Keep grinding.");gen()};
+save();
+</script>
+</body>
+</html>
